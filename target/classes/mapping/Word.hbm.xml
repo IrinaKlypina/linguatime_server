@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="entity.Word" table="WORD">
+        <id name="wordId" type="java.lang.Long">
+            <column name="WORD_ID" />
+            <generator class="identity" />
+        </id>
+        <property name="name" type="string">     
+            <column name="NAME" length="255" not-null="true" />
+        </property>
+        <property name="lang" type="string">
+            <column name="LANG" length="3" not-null="true" />
+        </property>
+        <many-to-one name="pack" class="entity.Pack" fetch="select">
+            <column name="PACK_ID" not-null="true" />
+        </many-to-one>
+        <property name="progress" type="java.lang.Integer">
+            <column name="PROGRESS" length="3" not-null="true" />
+        </property>
+        <set name="translations" table="TRANSLATION" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="WORD_ID"  not-null="true" />
+            </key>
+            <one-to-many class="entity.Translation" />
+        </set>
+        <one-to-one name="picture" class="entity.Picture" constrained="true"></one-to-one>
+    </class>
+</hibernate-mapping>

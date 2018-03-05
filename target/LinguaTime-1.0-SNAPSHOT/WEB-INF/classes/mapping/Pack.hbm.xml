@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="entity.Pack" table="PACK">
+        <id name="packId" type="java.lang.Long">
+            <column name="PACK_ID" />
+            <generator class="identity" />
+        </id>
+        <property name="name" type="string">     
+            <column name="NAME" length="255" not-null="true" />
+        </property>
+        <many-to-one name="user" class="entity.User" fetch="select">
+            <column name="USER_ID" not-null="true" />
+        </many-to-one>
+        <set name="words" table="WORD" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="PACK_ID" not-null="true" />
+            </key>
+            <one-to-many class="entity.Word" />
+        </set>
+</class>
+</hibernate-mapping>

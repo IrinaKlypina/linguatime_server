@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="entity.Translation" table="TRANSLATION">
+        <id name="translationId" type="java.lang.Long">
+            <column name="TRANSLATION_ID" />
+            <generator class="identity" />
+        </id>
+        <property name="name" type="string">     
+            <column name="NAME" length="255" not-null="true" />
+        </property>
+        <many-to-one name="word" class="entity.Word" fetch="select">
+            <column name="WORD_ID" not-null="true" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

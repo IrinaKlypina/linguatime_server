@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="entity.Picture" table="PICTURE">
+        <id name="pictureId" type="java.lang.Long">
+            <column name="PICTURE_ID" />
+            <generator class="identity" />
+        </id>
+        <property name="link" type="string">     
+            <column name="LINK" length="255" not-null="true" />
+        </property>
+        <one-to-one name="word" class="entity.Word" cascade="save-update"></one-to-one>
+    </class>
+</hibernate-mapping>
